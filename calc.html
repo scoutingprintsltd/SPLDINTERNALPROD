@@ -4,125 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar Sales Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        #sales-calculator-container {
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            padding: 20px;
-        }
-        h1 {
-            color: #1a2e5a;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #4a5568;
-        }
-        input[type="range"] {
-            width: 100%;
-        }
-        .range-values {
-            display: flex;
-            justify-content: space-between;
-            color: #718096;
-            font-size: 14px;
-        }
-        .summary {
-            background-color: #e6f0ff;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        .summary h2 {
-            color: #1a2e5a;
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-        .profit {
-            font-size: 24px;
-            font-weight: bold;
-            color: #2b6cb0;
-            margin-bottom: 10px;
-        }
-        .info {
-            background-color: #e6ffe6;
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #2f855a;
-        }
-        .details {
-            background-color: #f8f8f8;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        .details h2 {
-            color: #1a2e5a;
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-        .details p {
-            margin: 5px 0;
-            color: #4a5568;
-        }
-    </style>
 </head>
-<body>
-    <div id="sales-calculator-container">
-        <h1>Calendar Sales Calculator</h1>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 100%; margin: 0; padding: 10px; box-sizing: border-box;">
+    <div id="sales-calculator-container" style="background-color: #f0f0f0; border-radius: 8px; padding: 15px;">
+        <h1 style="color: #1a2e5a; font-size: 24px; margin-bottom: 15px;">Calendar Sales Calculator</h1>
         
-        <div class="input-group">
-            <label>£ Selling Price: £<span id="selling-price-display">14.00</span></label>
-            <input type="range" id="selling-price" min="7" max="35" step="0.5" value="14">
-            <div class="range-values">
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; color: #4a5568;">
+                £ Selling Price: £<span id="selling-price-display">14.00</span>
+            </label>
+            <input type="range" id="selling-price" min="7" max="35" step="0.5" value="14" style="width: 100%;">
+            <div style="display: flex; justify-content: space-between; color: #718096; font-size: 12px;">
                 <span>£7</span>
                 <span>£35</span>
             </div>
         </div>
 
-        <div class="input-group">
-            <label>📅 Quantity to Sell: <span id="quantity-display">100</span></label>
-            <input type="range" id="quantity" min="1" max="300" step="1" value="100">
-            <div class="range-values">
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; color: #4a5568;">
+                📅 Quantity to Sell: <span id="quantity-display">100</span>
+            </label>
+            <input type="range" id="quantity" min="1" max="300" step="1" value="100" style="width: 100%;">
+            <div style="display: flex; justify-content: space-between; color: #718096; font-size: 12px;">
                 <span>1</span>
                 <span>300</span>
             </div>
         </div>
 
-        <div class="summary">
-            <h2>🛒 Profit Summary</h2>
-            <div class="profit">£<span id="client-profit">568.48</span></div>
-            <p>Your Profit for <span id="quantity-summary">100</span> calendars</p>
-            <p>Price per calendar: £<span id="price-per-calendar">14.00</span></p>
+        <div style="background-color: #e6f0ff; padding: 15px; border-radius: 8px; margin-top: 15px;">
+            <h2 style="color: #1a2e5a; font-size: 18px; margin-bottom: 10px;">🛒 Profit Summary</h2>
+            <div style="font-size: 22px; font-weight: bold; color: #2b6cb0; margin-bottom: 10px;">
+                £<span id="client-profit">568.48</span>
+            </div>
+            <p style="margin: 5px 0;">Your Profit for <span id="quantity-summary">100</span> calendars</p>
+            <p style="margin: 5px 0;">Price per calendar: £<span id="price-per-calendar">14.00</span></p>
         </div>
 
-        <div class="info">
-            <p>ℹ️ This will all be confirmed when you start your calendar creation. No risk to you.</p>
+        <div style="background-color: #e6ffe6; padding: 10px; border-radius: 8px; margin-top: 15px; font-size: 14px; color: #2f855a;">
+            <p style="margin: 5px 0;">ℹ️ This will all be confirmed when you start your calendar creation. No risk to you.</p>
         </div>
 
-        <div class="details">
-            <h2>🔒 Internal Business Details</h2>
-            <p>Supplier Cost: £<span id="supplier-cost">264.67</span></p>
-            <p>VAT (20%): £<span id="vat-cost">52.93</span></p>
-            <p>Our Profit (45% - shared VAT): £<span id="our-profit">438.65</span></p>
-            <p>Shopify Fees: £<span id="shopify-fees">48.80</span></p>
-            <p>Net Profit: £<span id="net-profit">389.85</span></p>
-            <p>Client Profit: £<span id="client-profit-details">568.48</span></p>
+        <div style="background-color: #f8f8f8; padding: 15px; border-radius: 8px; margin-top: 15px;">
+            <h2 style="color: #1a2e5a; font-size: 18px; margin-bottom: 10px;">🔒 Internal Business Details</h2>
+            <p style="margin: 5px 0; color: #4a5568;">Supplier Cost: £<span id="supplier-cost">264.67</span></p>
+            <p style="margin: 5px 0; color: #4a5568;">VAT (20%): £<span id="vat-cost">52.93</span></p>
+            <p style="margin: 5px 0; color: #4a5568;">Our Profit (45% - shared VAT): £<span id="our-profit">438.65</span></p>
+            <p style="margin: 5px 0; color: #4a5568;">Shopify Fees: £<span id="shopify-fees">48.80</span></p>
+            <p style="margin: 5px 0; color: #4a5568;">Net Profit: £<span id="net-profit">389.85</span></p>
+            <p style="margin: 5px 0; color: #4a5568;">Client Profit: £<span id="client-profit-details">568.48</span></p>
         </div>
     </div>
 
@@ -194,11 +123,12 @@
 
                 document.getElementById('net-profit').textContent = (calculatedOurProfit - fees).toFixed(2);
             } else {
-                document.querySelector('.summary').innerHTML = `
-                    <h2>📞 Contact Sales</h2>
-                    <p>For orders over 250 units, please contact our sales team for a custom quote and potential bulk discounts.</p>
+                const summaryElement = document.querySelector('div[style*="background-color: #e6f0ff"]');
+                summaryElement.innerHTML = `
+                    <h2 style="color: #1a2e5a; font-size: 18px; margin-bottom: 10px;">📞 Contact Sales</h2>
+                    <p style="margin: 5px 0;">For orders over 250 units, please contact our sales team for a custom quote and potential bulk discounts.</p>
                 `;
-                document.querySelector('.details').style.display = 'none';
+                document.querySelector('div[style*="background-color: #f8f8f8"]').style.display = 'none';
             }
         }
 
