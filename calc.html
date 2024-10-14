@@ -74,13 +74,16 @@
             margin: 5px 0;
             font-size: 14px;
         }
+        .icon {
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
     <h2>Calendar Sales Calculator</h2>
     
     <div class="input-group">
-        <label for="selling-price">Selling Price: £<span id="selling-price-display">14.00</span></label>
+        <label for="selling-price"><span class="icon">💷</span>Selling Price: £<span id="selling-price-display">14.00</span></label>
         <input type="range" id="selling-price" min="7" max="35" step="0.5" value="14">
         <div class="range-labels">
             <span id="min-selling-price">£7</span>
@@ -89,7 +92,7 @@
     </div>
 
     <div class="input-group">
-        <label for="quantity">Quantity to Sell: <span id="quantity-display">100</span></label>
+        <label for="quantity"><span class="icon">📅</span>Quantity to Sell: <span id="quantity-display">100</span></label>
         <input type="range" id="quantity" min="1" max="300" step="1" value="100">
         <div class="range-labels">
             <span>1</span>
@@ -98,18 +101,18 @@
     </div>
 
     <div class="profit-summary">
-        <h3>Profit Summary</h3>
+        <h3><span class="icon">🛒</span>Profit Summary</h3>
         <p class="profit-amount">£<span id="client-profit">568.48</span></p>
         <p>Your Profit for <span id="quantity-summary">100</span> calendars</p>
         <p>Price per calendar: £<span id="price-per-calendar">14.00</span></p>
     </div>
 
     <div class="info-message">
-        <p>This will all be confirmed when you start your calendar creation. No risk to you.</p>
+        <p><span class="icon">ℹ️</span>This will all be confirmed when you start your calendar creation. No risk to you.</p>
     </div>
 
     <div class="internal-details">
-        <h3>Internal Business Details</h3>
+        <h3><span class="icon">🔒</span>Internal Business Details</h3>
         <p>Supplier Cost: £<span id="supplier-cost">264.67</span></p>
         <p>VAT (20%): £<span id="vat-cost">52.93</span></p>
         <p>Our Profit (45% - shared VAT): £<span id="our-profit">438.65</span></p>
@@ -203,7 +206,7 @@
                 document.querySelector('.internal-details').style.display = 'block';
             } else {
                 document.querySelector('.profit-summary').innerHTML = `
-                    <h3>Contact Sales</h3>
+                    <h3><span class="icon">📞</span>Contact Sales</h3>
                     <p>For orders over 250 units, please contact our sales team for a custom quote and potential bulk discounts.</p>
                 `;
                 document.querySelector('.internal-details').style.display = 'none';
