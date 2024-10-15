@@ -112,16 +112,31 @@
                 const fees = calculateShopifyFees(sellingPrice, quantity);
                 document.getElementById('shopify-fees').textContent = fees.toFixed(2);
 
-                const totalProfit = totalRevenue - totalCost - fees;
+                const totalProfit = Math.max(0, totalRevenue - totalCost - fees);
                 const sharedVatCost = vatAmount / 2; // Split VAT cost 50/50
-                const calculatedOurProfit = (totalProfit * 0.45) - sharedVatCost; // 45% of profit minus shared VAT cost
+                const calculatedOurProfit = Math.max(0, (totalProfit * 0.45) - sharedVatCost); // 45% of profit minus shared VAT cost
                 document.getElementById('our-profit').textContent = calculatedOurProfit.toFixed(2);
 
-                const calculatedClientProfit = totalProfit - calculatedOurProfit - sharedVatCost;
+                const calculatedClientProfit = Math.max(0, totalProfit - calculatedOurProfit - sharedVatCost);
                 document.getElementById('client-profit').textContent = calculatedClientProfit.toFixed(2);
                 document.getElementById('client-profit-details').textContent = calculatedClientProfit.toFixed(2);
 
-                document.getElementById('net-profit').textContent = (calculatedOurProfit - fees).toFixed(2);
+                const netProfit = Math.max(0, calculatedOurProfit - fees);
+                document.getElementById('net-profit').textContent = netProfit.toFixed(2);
+
+                // Show warning if profit is zero
+                const warningElement = document.querySelector('div[style*="background-color: #e6ffe6"]');
+                if (totalProfit === 0) {
+                    warningElement.innerHTML = `
+                        <p style="margin: 5px 0; color: #e53e3e;">⚠️ Warning: Current settings result in no profit. Please adjust the selling price or quantity.</p>
+                    `;
+                    warningElement.style.backgroundColor = "#ffe6e6";
+                } else {
+                    warningElement.innerHTML = `
+                        <p style="margin: 5px 0;">ℹ️ This will all be confirmed when you start your calendar creation. No risk to you.</p>
+                    `;
+                    warningElement.style.backgroundColor = "#e6ffe6";
+                }
             } else {
                 const summaryElement = document.querySelector('div[style*="background-color: #e6f0ff"]');
                 summaryElement.innerHTML = `
