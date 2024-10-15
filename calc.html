@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <div style="background-color: #e6f0ff; padding: 15px; border-radius: 8px; margin-top: 15px;">
+        <div id="profit-summary" style="background-color: #e6f0ff; padding: 15px; border-radius: 8px; margin-top: 15px;">
             <h2 style="color: #1a2e5a; font-size: 18px; margin-bottom: 10px;">🛒 Profit Summary</h2>
             <div style="font-size: 22px; font-weight: bold; color: #2b6cb0; margin-bottom: 10px;">
                 £<span id="client-profit">568.48</span>
@@ -40,11 +40,11 @@
             <p style="margin: 5px 0;">Price per calendar: £<span id="price-per-calendar">14.00</span></p>
         </div>
 
-        <div style="background-color: #e6ffe6; padding: 10px; border-radius: 8px; margin-top: 15px; font-size: 14px; color: #2f855a;">
+        <div id="warning-message" style="background-color: #e6ffe6; padding: 10px; border-radius: 8px; margin-top: 15px; font-size: 14px; color: #2f855a;">
             <p style="margin: 5px 0;">ℹ️ This will all be confirmed when you start your calendar creation. No risk to you.</p>
         </div>
 
-        <div style="background-color: #f8f8f8; padding: 15px; border-radius: 8px; margin-top: 15px;">
+        <div id="internal-details" style="background-color: #f8f8f8; padding: 15px; border-radius: 8px; margin-top: 15px;">
             <h2 style="color: #1a2e5a; font-size: 18px; margin-bottom: 10px;">🔒 Internal Business Details</h2>
             <p style="margin: 5px 0; color: #4a5568;">Supplier Cost: £<span id="supplier-cost">264.67</span></p>
             <p style="margin: 5px 0; color: #4a5568;">VAT (20%): £<span id="vat-cost">52.93</span></p>
@@ -100,6 +100,10 @@
             document.getElementById('quantity-summary').textContent = quantity;
             document.getElementById('price-per-calendar').textContent = sellingPrice.toFixed(2);
 
+            const profitSummaryElement = document.getElementById('profit-summary');
+            const warningElement = document.getElementById('warning-message');
+            const internalDetailsElement = document.getElementById('internal-details');
+
             if (quantity <= 250) {
                 const baseCost = getPriceForQuantity(quantity);
                 const vatAmount = baseCost * 0.2; // 20% VAT
@@ -124,8 +128,11 @@
                 const netProfit = Math.max(0, calculatedOurProfit - fees);
                 document.getElementById('net-profit').textContent = netProfit.toFixed(2);
 
-                // Show warning if profit is zero
-                const warningElement = document.querySelector('div[style*="background-color: #e6ffe6"]');
+                // Show or hide elements based on quantity
+                profitSummaryElement.style.display = 'block';
+                internalDetailsElement.style.display = 'block';
+
+                // Update warning message based on profit
                 if (totalProfit === 0) {
                     warningElement.innerHTML = `
                         <p style="margin: 5px 0; color: #e53e3e;">⚠️ Warning: Current settings result in no profit. Please adjust the selling price or quantity.</p>
@@ -138,12 +145,13 @@
                     warningElement.style.backgroundColor = "#e6ffe6";
                 }
             } else {
-                const summaryElement = document.querySelector('div[style*="background-color: #e6f0ff"]');
-                summaryElement.innerHTML = `
+                // For quantities over 250
+                profitSummaryElement.innerHTML = `
                     <h2 style="color: #1a2e5a; font-size: 18px; margin-bottom: 10px;">📞 Contact Sales</h2>
                     <p style="margin: 5px 0;">For orders over 250 units, please contact our sales team for a custom quote and potential bulk discounts.</p>
                 `;
-                document.querySelector('div[style*="background-color: #f8f8f8"]').style.display = 'none';
+                warningElement.style.display = 'none';
+                internalDetailsElement.style.display = 'none';
             }
         }
 
